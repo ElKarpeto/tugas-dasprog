@@ -3,8 +3,9 @@
 /* program untuk menghitung waktu memotong rumput halaman rumah */
 
 /* aturan input */
+
 /* 
-0 <= panjangLapangan, lebarLapangan, panjangRumah, lebarRumah <= kapasitas maksimal double type
+0 <= panjangLapangan, lebarLapangan, panjangRumah, lebarRumah <= kapasitas maksimal double type dalam feet
 panjangLapangan >= panjangRumah
 lebarLapangan >= lebarRumah
 */
@@ -12,7 +13,7 @@ lebarLapangan >= lebarRumah
 int main() {
     double panjangLapangan, lebarLapangan, panjangRumah, lebarRumah;
     double luasLapangan, luasRumah, selisihLuas;
-    double kecPemotong = 2; // kecepatan pemotong rumput
+    double const kecPemotong = 2; // kecepatan pemotong rumput = 2 feet^2 / detik
 
     scanf("%lf%lf%lf%lf", &panjangLapangan, &lebarLapangan, &panjangRumah, &lebarRumah);
 

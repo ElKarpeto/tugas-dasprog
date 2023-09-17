@@ -34,6 +34,7 @@ int main()
     // y = mx + xp
     xp = mp * (-x_mid) + y_mid;
 
+    // karena xp dapat bernilai negatif, untuk memudahkan dalam membacanya saya menambahkan "()"
     printf("Persamaan garis adalah y = %lfx + (%lf)", mp, xp);
     return 0;
 }

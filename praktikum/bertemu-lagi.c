@@ -1,55 +1,87 @@
 #include <stdio.h>
-#include <math.h>
 
 int main()
 {
     int N;
     int x1, y1, x2, y2;
 
-    int result;
-
     scanf("%d", &N);
-    scanf("%d%d%d%d", &x1, &y1, &x2, &y2);
+    scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
 
-    if ((x1 - (x2 - (x2 - 1))) == 0 || (y1 - (y2 - (y2 - 1))) == 0)
+    int patokanX1, patokanY1, patokanX2, patokanY2;
+    int patokan1, patokan2; // patokan1 dan patokan2 digunakan untuk menentukan ada di lapisan mana kedua orang tersebut
+    if (x1 > (N - x1))
     {
-        result = 0;
-    }
-    int patokanx = x2 - x1;
-    int patokany = y2 - y1;
-    int X, Y;
-
-    if (patokanx > 0)
-    {
-        X = patokanx;
+        patokanX1 = (N - x1) + 1;
     }
     else
     {
-        X = -(patokanx);
+        patokanX1 = x1;
     }
 
-    if (patokany > 0)
+    if (y1 > (N - y1))
     {
-        Y = patokany;
+        patokanY1 = (N - y1) + 1;
     }
     else
     {
-        Y = -(patokany);
+        patokanY1 = y1;
     }
 
-    if (X > Y)
+    if (patokanX1 > patokanY1)
     {
-        result = y1 - (y2 - (y2 - 1));
+        patokan1 = patokanY1;
     }
-    else if (X < Y)
+    else if (patokanX1 == patokanY1)
     {
-        result = x1 - (x2 - (x2 - 1));
+        patokan1 = patokanX1;
     }
-    else if (X == Y)
+    else
     {
-        result = x1 - (x2 - (x2 - 1));
+        patokan1 = patokanX1;
     }
 
+    if (x2 > (N - x2))
+    {
+        patokanX2 = (N - x2) + 1;
+    }
+    else
+    {
+        patokanX2 = x2;
+    }
+
+    if (y2 > (N - y2))
+    {
+        patokanY2 = (N - y2) + 1;
+    }
+    else
+    {
+        patokanY2 = y2;
+    }
+
+    if (patokanX2 > patokanY2)
+    {
+        patokan2 = patokanY2;
+    }
+    else if (patokanX2 == patokanY2)
+    {
+        patokan2 = patokanX2;
+    }
+    else
+    {
+        patokan2 = patokanX2;
+    }
+
+    int result = patokan2 - patokan1;
+
+    if (result < 0)
+    {
+        result = -(result);
+    }
+    else
+    {
+        result = result;
+    }
     printf("%d", result);
 
     return 0;

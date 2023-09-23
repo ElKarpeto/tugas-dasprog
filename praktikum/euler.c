@@ -4,24 +4,30 @@ int main()
 {
     int P, M, N;
 
-    scanf("%d%d%d", &P, &M, &N);
-    int m = M - 1;
+    scanf("%d %d %d", &P, &M, &N);
 
-    if ((m % N > 0) && (P == 1))
+    // kalau sisa kue adalah kelipatan (N + 1), dimana (N + 1) adalah kelipatan saat orang yang pertama memakan kue kalah
+    if (M % (N + 1) == 0)
     {
-        printf("haqqy");
+        if (P == 1)
+        {
+            printf("risma");
+        }
+        else
+        {
+            printf("haqqy");
+        }
     }
-    else if ((m % N == 0) && (P == 1))
+    else
     {
-        printf("risma");
-    }
-    else if ((m % N > 0) && (P == 2))
-    {
-        printf("risma");
-    }
-    else if ((m & N == 0) && (P == 2))
-    {
-        printf("haqqy");
+        if (P == 1)
+        {
+            printf("haqqy");
+        }
+        else
+        {
+            printf("risma");
+        }
     }
 
     return 0;

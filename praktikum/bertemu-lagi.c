@@ -78,10 +78,6 @@ int main()
     {
         result = -(result);
     }
-    else
-    {
-        result = result;
-    }
     printf("%d", result);
 
     return 0;

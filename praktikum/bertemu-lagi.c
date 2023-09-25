@@ -8,8 +8,8 @@ int main()
     scanf("%d", &N);
     scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
 
-    int patokanX1, patokanY1, patokanX2, patokanY2;
-    int patokan1, patokan2; // patokan1 dan patokan2 digunakan untuk menentukan ada di lapisan mana kedua orang tersebut
+    int patokanX1, patokanY1, patokanX2, patokanY2; // patokanX1, patokanY1, patokanX2 dan patokanY2 digunakan untuk menentukan nilai yang paling kecil
+    int patokan1, patokan2;                         // patokan1 dan patokan2 digunakan untuk menentukan ada di lapisan mana kedua orang tersebut
     if (x1 > (N - x1))
     {
         patokanX1 = (N - x1) + 1;

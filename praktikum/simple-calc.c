@@ -24,7 +24,7 @@ int main()
         break;
     }
 
-    int digit_akhir = operasi & 1;
+    int digit_akhir = operasi & 1; // meng-AND kan hasil operasi dengan 1
 
     printf("%d", digit_akhir);
 

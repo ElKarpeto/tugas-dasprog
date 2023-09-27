@@ -9,7 +9,7 @@ int main()
     scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
 
     int patokanX1, patokanY1, patokanX2, patokanY2; // patokanX1, patokanY1, patokanX2 dan patokanY2 digunakan untuk menentukan nilai yang paling kecil
-    int patokan1, patokan2;                         // patokan1 dan patokan2 digunakan untuk menentukan ada di lapisan mana kedua orang tersebut
+    int layer1, layer2;                             // layer1 dan layer2 digunakan untuk menentukan ada di lapisan mana kedua orang tersebut
     if (x1 > (N - x1))
     {
         patokanX1 = (N - x1) + 1;
@@ -30,15 +30,15 @@ int main()
 
     if (patokanX1 > patokanY1)
     {
-        patokan1 = patokanY1;
+        layer1 = patokanY1;
     }
     else if (patokanX1 == patokanY1)
     {
-        patokan1 = patokanX1;
+        layer1 = patokanX1;
     }
     else
     {
-        patokan1 = patokanX1;
+        layer1 = patokanX1;
     }
 
     if (x2 > (N - x2))
@@ -61,18 +61,18 @@ int main()
 
     if (patokanX2 > patokanY2)
     {
-        patokan2 = patokanY2;
+        layer2 = patokanY2;
     }
     else if (patokanX2 == patokanY2)
     {
-        patokan2 = patokanX2;
+        layer2 = patokanX2;
     }
     else
     {
-        patokan2 = patokanX2;
+        layer2 = patokanX2;
     }
 
-    int result = patokan2 - patokan1;
+    int result = layer2 - layer1;
 
     if (result < 0)
     {

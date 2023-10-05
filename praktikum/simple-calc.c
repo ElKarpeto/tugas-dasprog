@@ -24,6 +24,8 @@ int main()
         break;
     }
 
+    // operasi = 5 = 101
+    // 101 & 001 => 1 & 0 , 0 & 0 , 1 & 1 = 001 = 1
     int digit_akhir = operasi & 1; // meng-AND kan hasil operasi dengan 1
 
     printf("%d", digit_akhir);

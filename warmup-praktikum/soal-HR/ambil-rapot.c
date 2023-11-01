@@ -2,21 +2,24 @@
 
 int main()
 {
-    int x;
+    float x;
 
-    scanf("%d", &x);
+    scanf("%f", &x);
 
-    int n;
-    int orang = 4;
-    while (orang--)
+    float arr[4];
+
+    for (int i = 0; i < 4; i++)
     {
-        scanf("%d", &n);
+        scanf("%f", &arr[i]);
+    }
 
-        if (n > 75)
+    for (int i = 0; i < 4; i++)
+    {
+        if (arr[i] > 75)
         {
             printf("Wah kamu lulus!!\n");
         }
-        else if (n <= 75 && n > x)
+        else if (arr[i] <= 75 && arr[i] > x)
         {
             printf("Loh kamu harus remidi :3\n");
         }

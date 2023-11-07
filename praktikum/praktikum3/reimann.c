@@ -1,32 +1,34 @@
 #include <stdio.h>
+#include <string.h>
 
-long long countDigits(long long num)
+int sumDigit(int x)
 {
-  long long sum = 0, lastDigit = 0;
-  while (num > 0)
+  int sum = 0, lastDigit;
+  while (x > 0)
   {
-    lastDigit = num % 10;
-    num = num / 10;
+    lastDigit = x % 10;
     sum += lastDigit;
+    x /= 10;
   }
 
-  return sum;
-}
-
-long long hasil(long long x)
-{
-  if (x < 10)
-  {
-    return x;
-  }
-  hasil(countDigits(x));
+  if (sum < 10)
+    return sum;
+  else
+    return sumDigit(sum);
 }
 
 int main()
 {
-  long long n;
+  char num[100001];
 
-  scanf("%lld", &n);
+  scanf("%100000s", num);
 
-  printf("%lld", hasil(n));
+  int digit = 0;
+  for (int i = 0; i < strlen(num); i++)
+  {
+    digit += (num[i] - 48);
+  }
+
+  printf("%d\n", sumDigit(digit));
+  return 0;
 }

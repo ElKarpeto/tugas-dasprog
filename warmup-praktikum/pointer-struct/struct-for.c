@@ -51,6 +51,10 @@ int main()
                 printf("Bahasa Indonesia : %d\n", data[i].nilai3);
                 printf("Bahasa Inggris : %d\n", data[i].nilai4);
             }
+            else
+            {
+                printf("Nilai %s tidak ditemukan\n", data[i].nama);
+            }
         }
     }
 

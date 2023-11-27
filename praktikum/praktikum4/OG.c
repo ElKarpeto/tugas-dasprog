@@ -68,6 +68,7 @@ int main()
     }
 
     M.atk_counter++;
+
     if (M.atk_counter % 4 == 0)
     {
       int hp_curse, def_curse;
@@ -83,7 +84,7 @@ int main()
       if (M.hp > M.max_hp)
         M.hp = M.max_hp;
 
-      M.atk_counter -= 4;
+      M.atk_counter = 0;
     }
     else
     {

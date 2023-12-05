@@ -16,9 +16,9 @@ void rotasi(int n, int a[n][n], int b)
   }
   else if (b % 4 == 1)
   {
-    for (int j = 0; j < n; j++)
+    for (int j = n - 1; j >= 0; j--)
     {
-      for (int i = n - 1; i >= 0; i--)
+      for (int i = 0; i < n; i++)
       {
         printf("%d ", *(*(a + i) + j));
       }
@@ -38,9 +38,9 @@ void rotasi(int n, int a[n][n], int b)
   }
   else if (b % 4 == 3)
   {
-    for (int j = n - 1; j >= 0; j--)
+    for (int j = 0; j < n; j--)
     {
-      for (int i = 0; i < n; i++)
+      for (int i = n - 1; i >= 0; i++)
       {
         printf("%d ", *(*(a + i) + j));
       }
@@ -55,7 +55,6 @@ int main()
 
   scanf("%d", &banyak);
 
-  // untuk banyak > 1, putar akan di tambah terus
   int n, putar;
   while (banyak--)
   {

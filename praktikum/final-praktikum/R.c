@@ -1,28 +1,16 @@
 #include <stdio.h>
-#include <string.h>
+
+int Rizz(int a, int b)
+{
+  if ((a % b == 0) || (b % a == 0))
+    return 1;
+  else
+    return 0;
+}
 
 int main()
 {
-  int n, m;
-  char *HP[n];
-  char *TT[m];
+  int a, b;
 
-  scanf("%d", &n);
-
-  for (int i = 0; i < n; i++)
-  {
-    scanf("%10s", HP[i]);
-  }
-
-  scanf("%d", &m);
-
-  for (int i = 0; i < m; i++)
-  {
-    scanf("%21s", TT[i]);
-  }
-
-  for (int i = 0; i < n; i++)
-  {
-    printf("%s", HP[i]);
-  }
+  scanf("%d %d", &a, &b);
 }

@@ -1,57 +1,73 @@
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 
-void konversiCharToBinary(char karakter)
+void charToBinary(int num)
 {
-  for (int i = 128; i > 0; i /= 2)
+  int binary[9];
+  int i = 0;
+
+  while (i <= 8)
   {
-    printf("%d", (karakter & i) ? 1 : 0);
+    binary[i] = num % 2;
+    num = num / 2;
+    i++;
+  }
+
+  for (int i = 7; i >= 0; i--)
+  {
+    printf("%i", binary[i]);
   }
 }
 
-void konversiBinaryToChar(char binaryString[], int n)
+int binaryToChar(int x)
 {
-  for (int i = 0; i < n; i += 8)
+  int decimalNum = 0, i = 0, remainder;
+
+  while (x != 0)
   {
-    char result = 0;
-
-    for (int j = 0; j < 8; j++)
-    {
-      result *= 2;
-      result += binaryString[i + j] - '0';
-    }
-
-    printf("%c", result);
+    remainder = x % 10;
+    x = x / 10;
+    decimalNum += remainder * pow(2, i);
+    ++i;
   }
+  return decimalNum;
 }
 
 int main()
 {
-  int c;
+  int x;
+  scanf("%i\n", &x);
 
-  scanf("%d\n", &c);
-
-  char text[2001];
+  char s[1001];
   int index = 0;
-  while (scanf("%c", &text[index++]) != EOF)
+  while (scanf("%c", &s[index++]) != EOF)
     ;
-  text[index] = NULL;
+  s[index] = '\0';
 
-  printf("%s\n", text);
-
-  int len = strlen(text);
-
-  if (c == 1)
+  if (x == 1)
   {
-    for (int i = 0; i < len; i++)
+    for (int i = 0; i < strlen(s); i++)
     {
-      konversiCharToBinary(text[i]);
+      charToBinary(s[i]);
     }
   }
-
-  if (c == -1)
+  else
   {
-    konversiBinaryToChar(text, len);
+    int kanan = 7;
+    int kiri = 0;
+    while (kanan < strlen(s))
+    {
+      int konversi = 0;
+      for (int i = kiri; i <= kanan; i++)
+      {
+        konversi *= 10;
+        konversi += s[i] - '0';
+      }
+      char temp = binaryToChar(konversi);
+      printf("%c", temp);
+      kiri = kanan + 1;
+      kanan += 8;
+    }
   }
-
-  return 0;
 }

@@ -36,18 +36,4 @@ float div(int a, int b)
 int main()
 {
   int n;
-
-  printf("Enter ");
-  scanf("%d", &n);
-  int a, b;
-  scanf("%d %d", &a, &b);
-  switch (n)
-  {
-  case 1:
-    printf("Sum => %d", add(a, b));
-    break;
-
-  default:
-    break;
-  }
 }

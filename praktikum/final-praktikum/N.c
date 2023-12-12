@@ -1,51 +1,62 @@
 #include <stdio.h>
+#define ll long long
 
 int main()
 {
-  int N, H;
+  int n, hari;
+  scanf("%d %d", &n, &hari);
 
-  scanf("%d %d", &N, &H);
+  ll beratRobot[n];
+  ll beratTotal = 0;
+  ll max = 0;
 
-  int arr[N];
-  int maxAwal = 0;
-  for (int i = 0; i < N; i++)
+  for (int i = 0; i < n; i++)
   {
-    scanf("%d", &arr[i]);
-    if (arr[i] > maxAwal)
+    scanf("%lld", &beratRobot[i]);
+    beratTotal += beratRobot[i];
+    if (beratRobot[i] > max)
     {
-      maxAwal = arr[i];
+      max = beratRobot[i];
     }
   }
 
-  int pembagianHari[H];
-  int index = 0;
+  ll minimalBerat = 0, penambah = 0, berhasil = 0;
 
-  while (index != N)
+  while (berhasil == 0)
   {
-    for (int i = 0; i < H; i++)
+    minimalBerat = max + penambah;
+    penambah++;
+
+    ll beratPerhari = 0, index = 0, hariSementara = 0, totalSementara = 0;
+
+    while (hariSementara < hari)
     {
-      pembagianHari[i] = 0;
-      while (pembagianHari[i] < maxAwal)
+      while ((beratPerhari < minimalBerat) && (index < n))
       {
-        pembagianHari[i] += arr[index];
-        index++;
+        if (beratPerhari + beratRobot[index] <= minimalBerat)
+        {
+          beratPerhari += beratRobot[index];
+          index++;
+        }
+        else
+        {
+          break;
+        }
+      }
+      if (index <= n)
+      {
+        totalSementara += beratPerhari;
+        beratPerhari = 0;
+        hariSementara++;
       }
     }
-    maxAwal++;
-  }
 
-  int maxAkhir = 0;
-
-  for (int i = 0; pembagianHari[i] != '\0'; i++)
-  {
-    if (pembagianHari[i] > maxAkhir)
+    if (totalSementara == beratTotal)
     {
-      maxAkhir = pembagianHari[i];
+      berhasil = 1;
+      printf("%lld", minimalBerat);
     }
   }
 
-  if (maxAkhir > maxAwal)
-    printf("%d", maxAwal);
-  else
-    printf("%d", maxAkhir);
+  return 0;
 }

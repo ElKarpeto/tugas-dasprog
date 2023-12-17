@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define DATABASE_FILE "final-project.txt"
@@ -43,15 +44,19 @@ void displayCategory()
   }
 
   struct Barang temp;
-  char currentCategory[CATEGORY_MAX_LENGTH] = "";
+  char currentCategory[100] = "";
+  char printedCategories[100] = "";
 
   printf("\n====== Kategori ======\n");
   while (fscanf(dokumen, "%s %s %d", temp.kategori, temp.nama, &temp.jumlah) != EOF)
   {
-    if (strcmp(currentCategory, temp.kategori) != 0)
+    if (strcmp(currentCategory, temp.kategori) != 0 && strstr(printedCategories, temp.kategori) == NULL)
     {
       strcpy(currentCategory, temp.kategori);
       printf("-> %s\n", currentCategory);
+
+      strcat(printedCategories, temp.kategori);
+      strcat(printedCategories, " ");
     }
   }
 
@@ -107,7 +112,7 @@ void displayDataByCategory(char kategori[])
   fclose(dokumen);
 }
 
-void updateData(char kategori[], char nama[], int ubahData)
+void updateDataEntry(char kategori[], char nama[], int updateChoice, char newName[], int newJumlah)
 {
   FILE *dokumen = fopen(DATABASE_FILE, "r");
 
@@ -121,7 +126,7 @@ void updateData(char kategori[], char nama[], int ubahData)
 
   if (tempFile == NULL)
   {
-    perror("ERROR MEMBUAT FILE TEMP");
+    perror("ERROR DALAM MEMBUKA FILE TEMP");
     fclose(dokumen);
     return;
   }
@@ -129,36 +134,33 @@ void updateData(char kategori[], char nama[], int ubahData)
   struct Barang temp;
   int updated = 0;
 
-  char namaUbah[100];
-  int jumlahUbah;
-
   while (fscanf(dokumen, "%s %s %d", temp.kategori, temp.nama, &temp.jumlah) != EOF)
   {
-    if (strcmp(temp.kategori, kategori) == 0 && strcmp(temp.nama, nama) == 0)
+    if ((strcmp(temp.kategori, kategori) == 0) && (strcmp(temp.nama, nama) == 0))
     {
-      switch (ubahData)
+      switch (updateChoice)
       {
       case 1:
-        printf("Masukan Nama Baru : ");
-        scanf("%s", namaUbah);
-        printf("Masukan Jumlah Baru : ");
-        scanf("%d", &jumlahUbah);
-        fprintf(tempFile, "%s %s %d\n", kategori, namaUbah, jumlahUbah);
+        printf("Masukan Nama baru : ");
+        scanf("%s", newName);
+        printf("Masukan Jumlah baru : ");
+        scanf("%d", &newJumlah);
+        fprintf(tempFile, "%s %s %d\n", kategori, newName, newJumlah);
         break;
       case 2:
-        printf("Masukan Nama Baru : ");
-        scanf("%s", namaUbah);
-        fprintf(tempFile, "%s %s %d\n", kategori, namaUbah, temp.jumlah);
+        printf("Masukan Nama baru : ");
+        scanf("%s", newName);
+        fprintf(tempFile, "%s %s %d\n", kategori, newName, temp.jumlah);
         break;
       case 3:
-        printf("Masukan Jumlah Baru : ");
-        scanf("%d", &jumlahUbah);
-        fprintf(tempFile, "%s %s %d\n", kategori, temp.nama, jumlahUbah);
+        printf("Masukan Jumlah baru : ");
+        scanf("%d", &newJumlah);
+        fprintf(tempFile, "%s %s %d\n", kategori, temp.nama, newJumlah);
         break;
       default:
+        printf("Pilihan Anda Tidak Valid");
         break;
       }
-
       updated = 1;
     }
     else
@@ -172,14 +174,14 @@ void updateData(char kategori[], char nama[], int ubahData)
 
   if (!updated)
   {
-    printf("Data Tidak Ditemukan dengan Kategori '%s' dan Nama '%s'.\n", kategori, nama);
+    printf("Data dengan Kategori '%s' dan Nama '%s' Tidak Ditemukan\n", kategori, nama);
     remove("temp.txt");
   }
   else
   {
     remove(DATABASE_FILE);
     rename("temp.txt", DATABASE_FILE);
-    printf("Memperbarui Data Telah Berhasil\n");
+    printf("Data dengan Kategori '%s' dan Nama '%s' Telah Diperbarui\n", kategori, nama);
   }
 }
 
@@ -197,7 +199,7 @@ void deleteDataCategory(char kategori[])
 
   if (tempFile == NULL)
   {
-    perror("ERROR MEMBUAT FILE TEMP");
+    perror("ERROR DALAM MEMBUKA FILE");
     fclose(dokumen);
     return;
   }
@@ -247,7 +249,7 @@ void deleteData(char kategori[], char nama[])
 
   if (tempFile == NULL)
   {
-    perror("ERROR MEMBUAT FILE TEMP");
+    perror("ERROR DALAM MEMBUKA FILE");
     fclose(dokumen);
     return;
   }
@@ -288,7 +290,8 @@ int main()
   int pilihan = 0;
   int dataUbah;
   char namaData[100], pilihanKategori[100];
-
+  char namaBaru[100];
+  int jumlahBaru;
   while (pilihan != 6)
   {
     displayMenu();
@@ -298,6 +301,7 @@ int main()
     switch (pilihan)
     {
     case 1:
+      displayCategory();
       printf("Masukan Kategori yang Anda Ingin Tambahkan Datanya : ");
       scanf("%s", pilihanKategori);
       addData(pilihanKategori);
@@ -312,12 +316,13 @@ int main()
       displayCategory();
       printf("Masukan Kategori yang Anda Ingin Ubah Datanya : ");
       scanf("%s", pilihanKategori);
+      displayDataByCategory(pilihanKategori);
       printf("Masukan Nama dari Data yang Ingin Anda Update : ");
       scanf("%s", namaData);
       displayNameCount();
-      printf("Masukan Data yang ingin Anda Update : ");
+      printf("Masukan Pilihan Data yang ingin Anda Update : ");
       scanf("%d", &dataUbah);
-      updateData(pilihanKategori, namaData, dataUbah);
+      updateDataEntry(pilihanKategori, namaData, dataUbah, namaBaru, jumlahBaru);
       break;
     case 4:
       displayCategory();

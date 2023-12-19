@@ -1,8 +1,10 @@
 #include <iostream>
 using namespace std;
 
+// ini digunakan untuk set besar dari arena Robot
 const int MAX_N = 100;
 
+// ini untuk class Objek, bisa untuk Robot dan Finish
 class Objek
 {
 public:
@@ -10,9 +12,11 @@ public:
   int y;
 };
 
+// ini untuk class Solusi
 class Solution
 {
 public:
+  // fungsi untuk mencari posisi Robot atau Finish
   void findPosition(Objek &koordinat, int n, int m, char arr[MAX_N][MAX_N], char target)
   {
     for (int i = 0; i < n; i++)
@@ -29,6 +33,7 @@ public:
     }
   }
 
+  // fungsi untuk mencetak arena
   void printMovement(int n, int m, char arr[MAX_N][MAX_N])
   {
     for (int i = 0; i < n; i++)
@@ -41,6 +46,7 @@ public:
     }
   }
 
+  // fungsi untuk mengkonfirmasi apakah pergerakan robot diperbolehkan
   bool isValidMove(int x, int y, int n, int m, char arr[MAX_N][MAX_N], char command, int iterate)
   {
     if (x < 0 || x >= n || y < 0 || y >= m)
@@ -57,6 +63,7 @@ public:
     return true;
   }
 
+  // fungsi untuk men-track pergerakan robot
   void moveRobot(int &x, int &y, int n, int m, char arr[MAX_N][MAX_N], char command, int iterate)
   {
     arr[x][y] = '#';
@@ -129,6 +136,7 @@ int main()
 
   result.printMovement(N, M, arena);
 
+  // men-cek apakah robot mencapai finish atau tidak
   if (robot.x == finish.x && robot.y == finish.y)
   {
     cout << "Robot Mencapai Finish" << endl;
